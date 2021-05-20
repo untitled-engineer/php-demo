@@ -11,6 +11,8 @@ namespace App\Models;
 class Place
 {
 
+    private string $id;
+
     /** @var String */
     private string $name;
 
@@ -22,9 +24,26 @@ class Place
      * @param String $name
      * @param String $coordinate
      */
-    public function __construct(string $name, string $coordinate){
+    public function __construct(string $name, Coordinate $coordinate){
+        $this->id = uniqid();
         $this->name = $name;
-        $this->coordinate = Coordinate::fromString($coordinate);
+        $this->coordinate = $coordinate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId(string $id): void
+    {
+        $this->id = $id;
     }
 
     /**

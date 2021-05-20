@@ -30,7 +30,7 @@ class Coordinate
     {
         $pieces = explode(",", $coordinate);
 
-        return new Coordinate($pieces[0], $pieces[0]);
+        return new Coordinate(floatval($pieces[0]), floatval($pieces[0]));
     }
 
     /**

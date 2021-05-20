@@ -1,13 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Full Stack Developer practical test</title>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-</head>
-<body>
+@extends('layout')
+
+
+@section('content')
+
 <h1>Hello, {{ $name }}</h1>
-</body>
-</html>
+
+<form>
+    <fieldset>
+        <legend>Settings</legend>
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 222px;">
+                    <label for="place-selector">
+                        <select name="location" id="place-selector" >
+                            @foreach ($places as $place)
+                            <option value="{{ $place->getId() }}"> {{ $place->getName() }}</option>
+                            @endforeach
+                        </select>
+                    </label>
+                </td>
+                <td style="width: 122px;">
+                    <label for="range">Range (km)</label>
+                    <input type="text" value="0" name="range" id="range"/>
+                </td>
+                <td>
+                    <div id="distance-selector-wrapper">
+                        <div id="slider"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+
+@endsection

@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 
+use App\Models\Coordinate;
 use App\Models\Place;
 
 class PlacesRepository
@@ -22,7 +23,7 @@ class PlacesRepository
 
         $handle = fopen(base_path() . '/resources/data/places.csv','r');
         while ( ($data = fgetcsv($handle) ) !== FALSE ) {
-            array_push($this->data, $data);
+            array_push($this->data, new Place($data[0], Coordinate::fromString($data[1])));
         }
         array_shift($this->data);
         fclose($handle);
