@@ -25,7 +25,8 @@ app.controllers.getPlaceInfo = function () {
             target.html("");
             data.forEach(function (place) {
                 let li = $('<li/>').appendTo(target);
-                let a = $('<a/>').text(place.name + ' ' + place.distance).appendTo(li);
+                let distance = place.name + ' <em>' + parseInt(place.distance) + 'km</em>';
+                let a = $('<div/>').html(distance).appendTo(li);
             })
         },
         error: function (data) {
