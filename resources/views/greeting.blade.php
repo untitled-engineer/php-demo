@@ -31,6 +31,10 @@
             </tr>
         </table>
     </fieldset>
+    <fieldset>
+        <legend>Nearest places</legend>
+        <ol id="nearest-places" class="ajax"></ol>
+    </fieldset>
 </form>
 
 @endsection

@@ -16,3 +16,4 @@
 use App\Http\Controllers\IndexController;
 
 $router->get('/', "IndexController@index");
+$router->get('/get-place-info', "IndexController@placeInfo");

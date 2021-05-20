@@ -4,6 +4,8 @@
 namespace App\Models;
 
 
+use function Symfony\Component\String\s;
+
 /**
  * Class Place
  * @package App\Models
@@ -28,6 +30,21 @@ class Place
         $this->id = uniqid();
         $this->name = $name;
         $this->coordinate = $coordinate;
+    }
+
+    public static function fromDbRow(array $row)
+    {
+        $self = new self(
+            $row['name'],
+            new Coordinate(
+                floatval($row['lat']),
+                floatval($row['long'])
+            )
+        );
+
+        $self->id = $row['id'];
+
+        return $self;
     }
 
     /**

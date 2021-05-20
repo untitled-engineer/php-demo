@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\PlacesRepository;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Laravel\Lumen\Application;
 
-class IndexController
-    extends Controller
+class IndexController extends Controller
 {
 
-    protected $placesRepository;
+    /** @var PlacesRepository  */
+    protected PlacesRepository $placesRepository;
 
     /**
      * Create a new controller instance.
@@ -20,12 +24,28 @@ class IndexController
         $this->placesRepository = $placesRepository;
     }
 
-    //
+    /**
+     * @return View|Application
+     */
     public function index(){
 
         return view('greeting', [
             'name' => 'World!',
             'places' => $this->placesRepository->getAllPlaces(),
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function placeInfo(Request $request): JsonResponse
+    {
+        return response()->json(
+            $this->placesRepository->getNearestPlaces(
+                $request->input('place'),
+                $request->input('range'),
+            )
+        );
     }
 }
