@@ -87,13 +87,15 @@ WITH closest_candidates AS (
     ORDER BY places.geog <-> ' . $location . '::geometry
     LIMIT 6
 )
-SELECT *, ST_Distance(geog, ' . $location . '::geometry) AS distance
+SELECT *, ST_Distance(geog, ' . $location . '::geometry) / 100 as distance
 FROM closest_candidates
+WHERE (ST_Distance(geog, ' . $location . '::geometry) / 100) < :distance
 ORDER BY ST_Distance(geog, ' . $location . '::geometry)
 LIMIT 6;
 ';
 
         $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":distance", $range);
 
         if (!$stmt->execute()) {
             //throw todo

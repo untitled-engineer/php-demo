@@ -34,13 +34,8 @@ class Place
 
     public static function fromDbRow(array $row)
     {
-        $self = new self(
-            $row['name'],
-            new Coordinate(
-                floatval($row['lat']),
-                floatval($row['long'])
-            )
-        );
+        $self = new self($row['name'],
+            new Coordinate(floatval($row['lat']), floatval($row['long'])));
 
         $self->id = $row['id'];
 
@@ -94,7 +89,6 @@ class Place
     {
         $this->coordinate = $coordinate;
     }
-
 
     /**
      * @param Coordinate $coordinate
