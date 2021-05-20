@@ -15,16 +15,18 @@ const app = {
 const anyUiChangeHandler = debounce(() => app.controllers.getPlaceInfo());
 
 app.controllers.getPlaceInfo = function () {
-    const html = '';
-
+    const target = $('ol#nearest-places');
     $.ajax({
         type: 'get',
         url: '/get-place-info',
         data: app.data,
         dataType: 'json',
         success: function (data) {
-            console.log(data);
-            //$('#nearest-places').html(html);
+            target.html("");
+            data.forEach(function (place) {
+                let li = $('<li/>').appendTo(target);
+                let a = $('<a/>').text(place.name + ' ' + place.distance).appendTo(li);
+            })
         },
         error: function (data) {
             console.log(data);

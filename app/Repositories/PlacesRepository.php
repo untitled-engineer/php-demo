@@ -85,16 +85,15 @@ WITH closest_candidates AS (
     SELECT *
     FROM places
     ORDER BY places.geog <-> ' . $location . '::geometry
-    LIMIT 5
+    LIMIT 6
 )
-SELECT *
+SELECT *, ST_Distance(geog, ' . $location . '::geometry) AS distance
 FROM closest_candidates
 ORDER BY ST_Distance(geog, ' . $location . '::geometry)
-LIMIT 5;
+LIMIT 6;
 ';
 
         $stmt = $this->pdo->prepare($sql);
-
 
         if (!$stmt->execute()) {
             //throw todo
@@ -103,6 +102,8 @@ LIMIT 5;
         foreach ($stmt->fetchAll() as $row) {
             array_push($places, $row);
         }
+
+        array_shift($places);
 
         return $places;
     }
