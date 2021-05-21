@@ -90,32 +90,4 @@ class Place
         $this->coordinate = $coordinate;
     }
 
-    /**
-     * @param Coordinate $coordinate
-     * @Link https://stackoverflow.com/questions/10053358/measuring-the-distance-between-two-coordinates-in-php
-     * @return int
-     */
-    public function getDistanceFrom(Coordinate $coordinate): int
-    {
-
-        $delta_lat = $coordinate->getLat() - $this->coordinate->getLat();
-        $delta_lon = $coordinate->getLong() - $this->coordinate->getLong();
-
-        $earth_radius = 6372.795477598;
-
-        $alpha = $delta_lat/2;
-        $beta = $delta_lon/2;
-        $a  = sin(deg2rad($alpha))
-            * sin(deg2rad($alpha))
-            + cos(deg2rad($this->coordinate->getLat()))
-            * cos(deg2rad($coordinate->getLat()))
-            * sin(deg2rad($beta))
-            * sin(deg2rad($beta))
-        ;
-        $c = asin(min(1, sqrt($a)));
-        $distance = 2*$earth_radius * $c;
-
-        return round($distance, 4);
-    }
-
 }
