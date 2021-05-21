@@ -1,3 +1,22 @@
+## quick guide
+
+### how to run this application
+
+```bash
+$ git clone git@github.com:untitled-engineer/php-demo.git
+$ composer install
+$ php -S localhost:8000 -t public
+```
+
+### what inside?
+
+check ./app/Models/Place.php the main application entity class
+
+also, we have one _indexController_
+and two routes: root one and second for ajax callback
+
+in repository in controller has commented part of code, you can use it for fill records.
+
 # Lumen PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
