@@ -15,7 +15,7 @@ check ./app/Models/Place.php the main application entity class
 also, we have one _indexController_
 and two routes: root one and second for ajax callback
 
-in repository in controller has commented part of code, you can use it for fill records.
+in repository in constructor has commented part of code, you can use it for fill records.
 
 # Lumen PHP Framework
 
