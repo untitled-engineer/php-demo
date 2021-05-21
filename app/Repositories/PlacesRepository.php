@@ -23,6 +23,7 @@ class PlacesRepository
 
     public function __construct()
     {
+        // TODO Note: CSV file here represents the data source in general. In a real application, it can be a database, remote server, or API.
         $this->pdo =  new PDO('pgsql:host=localhost;port=5432;dbname=als;user=als;password=als');
 
         $this->data = array();
